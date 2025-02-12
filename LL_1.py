@@ -13,7 +13,7 @@ class LinkedList:
         
     def append(self, value):
         new_node = Node(value)
-        if self.head == None:
+        if self.head is None:
             self.head = new_node
             self.tail = new_node
         else:
@@ -22,20 +22,50 @@ class LinkedList:
         return True
         
 
-    # WRITE FIND_MIDDLE_NODE METHOD HERE #
-    #                                    #
-    #                                    #
-    #                                    #
-    #                                    #
-    ######################################
+    def find_middle_node(self):
+        slow = self.head
+        fast = self.head
+        while fast and fast.next is not None:
+            slow = slow.next
+            fast = fast.next.next
+        return slow
+
+def get_input():
+    while True:
+        user_input = input("ievadi numuru: ")
+        try:
+            value = int(user_input)
+            return value
+        except ValueError:
+            print("nav numurs")
 
 
+initial_value = get_input()
+my_linked_list = LinkedList(initial_value)
 
-my_linked_list = LinkedList(1)
-my_linked_list.append(2)
-my_linked_list.append(3)
-my_linked_list.append(4)
-my_linked_list.append(5)
+while True:
+    user_input = input("ievadi numuru: ")
+    if user_input.lower() == 'break':
+        break
+    try:
+        value = int(user_input)
+        my_linked_list.append(value)
+    except ValueError:
+        print("nav numurs")
 
-print( my_linked_list.find_middle_node().value )
+middle_node = my_linked_list.find_middle_node()
 
+print("Middle number:", middle_node.value)
+
+
+# my_linked_list = LinkedList(1)
+# my_linked_list.append(2)
+# my_linked_list.append(3)
+# my_linked_list.append(4)
+# my_linked_list.append(5)
+# my_linked_list.append(6)
+# 
+# 
+# middle_node = my_linked_list.find_middle_node()
+# 
+# print(middle_node.value)
